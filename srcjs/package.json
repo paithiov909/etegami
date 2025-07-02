@@ -1,0 +1,23 @@
+{
+  "name": "etegami",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "build": "tsup src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.0.8",
+    "@types/pako": "^2.0.3",
+    "happy-dom": "^18.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "pako": "^2.1.0"
+  }
+}
