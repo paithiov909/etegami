@@ -14,13 +14,14 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 etegami is an experimental viewer for nativeRaster images in R, rendered
 on an HTML5 `<canvas>` element via your browser. It provides a
 lightweight mechanism for visualizing raster graphics generated in R,
-particularly from graphics devices like `ragg::agg_capture()`.
+particularly from graphics devices like
+[ragg::agg_capture()](https://ragg.r-lib.org/reference/agg_capture.html).
 
 Instead of writing out PNGs or relying on heavy viewer infrastructure,
 etegami encodes nativeRaster images as JSON containing gzipped and
 base64-encoded pixel data, along with the image’s width, height, and an
 identifier. These JSON files can be sent to the browser and decoded into
-`ImageData`.
+[ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData).
 
 The viewer can:
 
@@ -28,6 +29,11 @@ The viewer can:
   slideshow.
 - Pause and resume playback interactively.
 - Capture canvas state changes and record them as a WebM animation.
+
+<figure>
+<img src="man/figures/viewer.png" alt="screenshot of viewer" />
+<figcaption aria-hidden="true">screenshot of viewer</figcaption>
+</figure>
 
 ## Why?
 
