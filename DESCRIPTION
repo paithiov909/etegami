@@ -1,11 +1,22 @@
 Package: etegami
-Title: What the Package Does (One Line, Title Case)
+Title: HTML5 Viewer for nativeRaster
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R:
+    person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre"))
+Description: An experimental viewer for 'nativeRaster' images in R,
+    rendered on an 'HTML5' canvas element via browsers.
 License: MIT + file LICENSE
-Suggests: 
+Depends:
+    R (>= 4.2)
+Imports:
+    fs,
+    grDevices,
+    jsonlite,
+    ragg,
+    rlang,
+    S7,
+    servr
+Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8

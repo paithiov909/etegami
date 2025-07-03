@@ -1,0 +1,69 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# etegami
+
+<!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+## Overview
+
+etegami is an experimental viewer for nativeRaster images in R, rendered
+on an HTML5 `<canvas>` element via your browser. It provides a
+lightweight mechanism for visualizing raster graphics generated in R,
+particularly from graphics devices like `ragg::agg_capture()`.
+
+Instead of writing out PNGs or relying on heavy viewer infrastructure,
+etegami encodes nativeRaster images as JSON containing gzipped and
+base64-encoded pixel data, along with the image’s width, height, and an
+identifier. These JSON files can be sent to the browser and decoded into
+`ImageData`.
+
+The viewer can:
+
+- Load multiple JSON files and display them in sequence, like a
+  slideshow.
+- Pause and resume playback interactively.
+- Capture canvas state changes and record them as a WebM animation.
+
+## Why?
+
+This project started as a personal exploration to make R graphics easier
+to work with when using VSCode. Existing tools like
+[httpgd](https://github.com/nx10/httpgd) are really powerful, but can be
+inflexible when switching to render raster images.
+
+Additionally, rendering to `<canvas>` opened up the possibility of
+recording animations directly in the browser.
+
+## Usage
+
+Typical usage looks like this:
+
+``` r
+library(etegami)
+
+# 1. Start a viewer server and prepare a capture device
+postino <- setup()
+
+# 2. Draw something and capture it
+plot(1:10)
+last_plot <- post(postino)  # manually trigger capture
+
+# 3. Open the viewer in your browser
+browse(postino, last_plot)
+
+# 4. Stop the server and close the capture device
+shutdown(postino)
+```
+
+You can also wrap plotting calls with `mask_plot()`:
+
+``` r
+postino <- setup(mode = "live")
+plot <- mask_plot(postino)
+plot(rnorm(100)) # automatically opens the viewer in a new window every time `plot()` is called
+```
