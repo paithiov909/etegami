@@ -14,6 +14,11 @@
 #' * `clear(x, ...)`: Deletes all saved JSON files.
 #' * `browse(x, ..., delay = 10000, strip_base_url = FALSE)`: Launches the viewer in a web browser to display saved frames as a slideshow.
 #'
+#' @param out_dir Output directory where JSON files are saved.
+#' @param capture_device A graphics device function to use for capturing frames. See [ragg::agg_capture()].
+#' @param id_counter A function to generate unique IDs for frames.
+#' @param mode `"batch"` (default) or `"live"`.
+#' @param server_config A list of configuration settings out of [servr::httd()].
 #' @export
 Postino <- new_class(
   "Postino",

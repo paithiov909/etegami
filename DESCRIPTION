@@ -10,7 +10,6 @@ Depends:
     R (>= 4.2)
 Imports:
     fs,
-    grDevices,
     jsonlite,
     ragg,
     rlang,

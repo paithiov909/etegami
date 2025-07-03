@@ -28,6 +28,16 @@ clear(x, ...)
 browse(x, ..., delay = 1000, strip_base_url = FALSE)
 }
 \arguments{
+\item{out_dir}{Output directory where JSON files are saved.}
+
+\item{capture_device}{A graphics device function to use for capturing frames. See \code{\link[ragg:agg_capture]{ragg::agg_capture()}}.}
+
+\item{id_counter}{A function to generate unique IDs for frames.}
+
+\item{mode}{\code{"batch"} (default) or \code{"live"}.}
+
+\item{server_config}{A list of configuration settings out of \code{\link[servr:httd]{servr::httd()}}.}
+
 \item{x}{Postino instance.}
 
 \item{...}{Files to browse.}
