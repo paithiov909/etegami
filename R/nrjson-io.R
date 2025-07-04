@@ -1,6 +1,6 @@
 #' Read a nativeRaster JSON file
 #'
-#' Loads a gzipped JSON file that encodes a nativeRaster object and restores it
+#' Loads a JSON file that encodes a nativeRaster object and restores it
 #' as an R `nativeRaster`.
 #'
 #' @param path Path to the JSON file.
@@ -17,8 +17,8 @@ read_nrjson <- function(path) {
 
 #' Write a nativeRaster object to JSON
 #'
-#' Encodes a `nativeRaster` object as gzipped JSON
-#' and saves it to disk. The file can be viewed in a compatible browser viewer.
+#' Encodes a `nativeRaster` object as JSON and saves it to disk.
+#' The file can be viewed in a compatible browser viewer.
 #'
 #' @param x A `nativeRaster` object.
 #' @param id A string identifier for the image.

@@ -13,6 +13,6 @@ read_nrjson(path)
 A \code{nativeRaster} object with \code{id} attribute.
 }
 \description{
-Loads a gzipped JSON file that encodes a nativeRaster object and restores it
+Loads a JSON file that encodes a nativeRaster object and restores it
 as an R \code{nativeRaster}.
 }

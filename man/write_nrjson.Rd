@@ -17,6 +17,6 @@ write_nrjson(x, id, path = paste0(id, ".json"))
 The \code{path} is invisibly returned.
 }
 \description{
-Encodes a \code{nativeRaster} object as gzipped JSON
-and saves it to disk. The file can be viewed in a compatible browser viewer.
+Encodes a \code{nativeRaster} object as JSON and saves it to disk.
+The file can be viewed in a compatible browser viewer.
 }

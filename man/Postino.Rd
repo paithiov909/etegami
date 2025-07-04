@@ -2,33 +2,18 @@
 % Please edit documentation in R/postino.R
 \name{Postino}
 \alias{Postino}
-\alias{shutdown}
-\alias{post}
-\alias{lst}
-\alias{clear}
-\alias{browse}
 \title{An S7 class for managing raster capture and viewer interaction}
 \usage{
 Postino(
-  out_dir = character(0),
+  serve_dir = character(0),
   capture_device = function() NULL,
   id_counter = function() NULL,
   mode = character(0),
   server_config = list()
 )
-
-shutdown(x, ...)
-
-post(x, ...)
-
-lst(x, ...)
-
-clear(x, ...)
-
-browse(x, ..., delay = 1000, strip_base_url = FALSE)
 }
 \arguments{
-\item{out_dir}{Output directory where JSON files are saved.}
+\item{serve_dir}{Directory where JSON files are saved.}
 
 \item{capture_device}{A graphics device function to use for capturing frames. See \code{\link[ragg:agg_capture]{ragg::agg_capture()}}.}
 
@@ -37,27 +22,20 @@ browse(x, ..., delay = 1000, strip_base_url = FALSE)
 \item{mode}{\code{"batch"} (default) or \code{"live"}.}
 
 \item{server_config}{A list of configuration settings out of \code{\link[servr:httd]{servr::httd()}}.}
-
-\item{x}{Postino instance.}
-
-\item{...}{Files to browse.}
-
-\item{delay}{Slide delay in milliseconds.}
-
-\item{strip_base_url}{If \code{TRUE}, remove the base URL from the file paths.
-Defaults to \code{FALSE}.}
 }
 \description{
 \code{Postino} objects manage the capture of \code{nativeRaster} images, saving them as JSON,
 and controlling a browser-based viewer interface. For usage, see \code{\link[=setup]{setup()}}.
 }
-\details{
-These methods are available for \code{Postino} objects:
-\itemize{
-\item \code{shutdown(x, ...)}: Stops the viewer's HTTP server, if it is running. And also, this always calls \code{\link[grDevices:dev]{grDevices::dev.off()}} internally.
-\item \code{post(x, ...)}: Captures a raster image using the associated graphics device and saves it as a JSON file.
-\item \code{lst(x, ...)}: Lists saved JSON files.
-\item \code{clear(x, ...)}: Deletes all saved JSON files.
-\item \code{browse(x, ..., delay = 10000, strip_base_url = FALSE)}: Launches the viewer in a web browser to display saved frames as a slideshow.
+\examples{
+\dontrun{
+# Instead of using `setup()`, you can create a Postino instance manually:
+postino <- Postino(
+  serve_dir = "Postino-dir",
+  capture_device = ragg::agg_capture(),
+  id_counter = counter(),
+  mode = "batch",
+  server_config = servr::httd("Postino-dir", browser = FALSE)
+)
 }
 }

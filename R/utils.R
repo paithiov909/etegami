@@ -23,26 +23,24 @@ time_stamp <- function() {
 }
 
 #' @noRd
-setup_assets <- function(dir) {
+setup_assets <- function(out_dir) {
   assets <- system.file("dist", package = "etegami", mustWork = TRUE)
-  dir <- file.path(dir, paste0("Postino-", time_stamp()))
-  fs::dir_create(dir)
-  fs::dir_copy(assets, dir, overwrite = TRUE)
+  out_dir <- file.path(out_dir, paste0("Postino-", time_stamp()))
+  fs::dir_create(out_dir)
+  fs::dir_copy(assets, out_dir, overwrite = TRUE)
 }
 
 #' Initialize a Postino instance and launch viewer server
 #'
-#' Sets up a temporary directory, copies viewer assets, starts a local server,
+#' Sets up a new subdirectory including viewer assets, starts a local server,
 #' and returns a `Postino` instance for managing raster output and display.
+#' `setup()` initializes a new graphics device via [ragg::agg_capture()]
+#' and starts a local HTTP server in the background using [servr::httd()].
 #'
-#' @note
-#' Note that calling `setup()` open a new graphics device via [ragg::agg_capture()]
-#' and launch a local HTTP server in the background using [servr::httd()].
-#'
-#' @param out_dir Output directory. Defaults to a temporary directory.
+#' @param out_dir Output directory where viewer assets are copied into.
+#' Defaults to a temporary directory.
 #' @param capture_device A function that returns a `nativeRaster` object.
 #' @param id_counter A function to generate frame IDs.
-#' Defaults to [time_stamp()].
 #' @param mode Viewer mode. Either `"batch"` or `"live"`.
 #' If `"live"` mode, the viewer will automatically launch
 #' every time `post()` is called.
@@ -51,16 +49,16 @@ setup_assets <- function(dir) {
 #' @export
 setup <- function(
   out_dir = tempdir(),
-  capture_device = ragg::agg_capture(),
+  capture_device = ragg::agg_capture(width = 720, height = 576),
   id_counter = counter(),
   mode = c("batch", "live"),
   ...
 ) {
   mode <- rlang::arg_match(mode)
-  out_dir <- setup_assets(out_dir)
-  config <- servr::httd(out_dir, browser = FALSE, ...) ## This returns a 'server_config' (list).
+  serve_dir <- setup_assets(out_dir)
+  config <- servr::httd(serve_dir, browser = FALSE, ...) ## This returns a 'server_config' (list).
   Postino(
-    out_dir = out_dir,
+    serve_dir = serve_dir,
     capture_device = capture_device,
     id_counter = id_counter,
     mode = mode,
@@ -80,7 +78,7 @@ mask_plot <- function(postino) {
   force(postino)
   function(x, y, ...) {
     if (missing(y)) {
-      base::plot(x, ...)
+      base::plot(x, , ...)
     } else {
       base::plot(x, y, ...)
     }

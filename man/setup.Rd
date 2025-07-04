@@ -6,19 +6,19 @@
 \usage{
 setup(
   out_dir = tempdir(),
-  capture_device = ragg::agg_capture(),
+  capture_device = ragg::agg_capture(width = 720, height = 576),
   id_counter = counter(),
   mode = c("batch", "live"),
   ...
 )
 }
 \arguments{
-\item{out_dir}{Output directory. Defaults to a temporary directory.}
+\item{out_dir}{Output directory where viewer assets are copied into.
+Defaults to a temporary directory.}
 
 \item{capture_device}{A function that returns a \code{nativeRaster} object.}
 
-\item{id_counter}{A function to generate frame IDs.
-Defaults to \code{\link[=time_stamp]{time_stamp()}}.}
+\item{id_counter}{A function to generate frame IDs.}
 
 \item{mode}{Viewer mode. Either \code{"batch"} or \code{"live"}.
 If \code{"live"} mode, the viewer will automatically launch
@@ -30,10 +30,8 @@ every time \code{post()} is called.}
 A \code{Postino} object.
 }
 \description{
-Sets up a temporary directory, copies viewer assets, starts a local server,
+Sets up a new subdirectory including viewer assets, starts a local server,
 and returns a \code{Postino} instance for managing raster output and display.
-}
-\note{
-Note that calling \code{setup()} open a new graphics device via \code{\link[ragg:agg_capture]{ragg::agg_capture()}}
-and launch a local HTTP server in the background using \code{\link[servr:httd]{servr::httd()}}.
+\code{setup()} initializes a new graphics device via \code{\link[ragg:agg_capture]{ragg::agg_capture()}}
+and starts a local HTTP server in the background using \code{\link[servr:httd]{servr::httd()}}.
 }
