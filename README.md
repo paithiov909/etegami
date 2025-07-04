@@ -18,9 +18,9 @@ particularly from graphics devices like
 [ragg::agg_capture()](https://ragg.r-lib.org/reference/agg_capture.html).
 
 Instead of writing out PNGs or relying on heavy viewer infrastructure,
-etegami encodes nativeRaster images as JSON containing base64-encoded and gzipped pixel data,
-along with the image’s width, height, and an identifier.
-These JSON files can be sent to the browser and decoded into
+etegami encodes nativeRaster images as JSON containing gzipped and
+base64-encoded pixel data, along with the image’s width, height, and an
+identifier. These JSON files can be sent to the browser and decoded into
 [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData).
 
 The viewer can:

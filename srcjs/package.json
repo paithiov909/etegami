@@ -6,9 +6,9 @@
     "test": "vitest",
     "build": "tsup src/index.ts"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "paithiov909",
+  "license": "MIT",
+  "description": "nativeRaster decoder",
   "devDependencies": {
     "@types/node": "^24.0.8",
     "@types/pako": "^2.0.3",
